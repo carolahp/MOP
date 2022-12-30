@@ -3,7 +3,8 @@
 ## Guía técnica de instalación 
 
 ### Software y Licencias Requeridas
-- Pentaho Data Integration (Community Edition)
+- **Pentaho Data Integration** (Community Edition)
+  
   version 9.3
   general availability release 9.3.0.0-428
   build date: abril 12, 2022
@@ -13,7 +14,8 @@
     - [GNU General Public License, version 2](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
     - [Mozilla Public License Version 1.1](https://www.mozilla.org/en-US/MPL/1.1/)
     
-- Microsoft Power BI Desktop 
+- **Microsoft Power BI Desktop** (Community)
+  
   Versión: 2.110.1161.0 64-bit (octubre de 2022)
   Se utilizó la Licencia gratuita, sin embargo ésta licencia impide la publicación de reportes de manera privada en la web, haciéndolos forzosamente públicos y accesibles por usuarios no autorizados.
   
@@ -22,14 +24,15 @@
   No obstante, si se quiere publicar reportes de manera privada en la web con otros usuarios, se deberá adquirir una licencia.   
   [Aquí](https://learn.microsoft.com/en-us/power-bi/consumer/end-user-license) está la explicación de los tipos de licencia ofrecidos para Microsoft Power BI (en inglés).
   
-  - MySQL 
+- **MySQL** 
+  
   Version 8.0.31 for Win64 on x86_64 (MySQL Community Server - GPL)
   [Community License](https://www.mysql.com/products/community/)
   
     
 ### Configuración del ambiente de producción
 
-#### Restauración base de datos Reporteria MySQL
+#### Restauración base de datos **reporteria MySQL**
 
 
 #### Restauración y ejecución manual de procesos ETL
