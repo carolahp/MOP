@@ -4,9 +4,11 @@ Esta documentación explica cómo utilizar e instalar el sistema de reportería 
 
 Se divide en dos secciones: 
 - **Guía de Usuario**: dedicada a los analistas, contiene información necesaria para el ingreso de datos, generación de reportes, etc.
-- **Guía Técnica de Instalación**: explica al usuario técnico informático cómo configurar y administrar el ambiente para ejecutar el sistema completo. 
+- **Guía Técnica de Instalación**: explica al usuario técnico informático cómo configurar y administrar el ambiente para ejecutar el sistema. 
 
 ## Guía de Usuario 
+
+Se recomienda ver este [video](https://drive.google.com/file/d/1WHZ6JCi0fxejuAg6MF3JqlgZiM_THYfx/view?usp=share_link), donde se explica a los usuarios cómo utilizar el sistema.  
 
 ## Ingreso de datos: Excel Decretos
 
@@ -45,21 +47,27 @@ Se divide en dos secciones:
   
     
 ### Configuración del ambiente de producción
+Las siguientes subsecciones explican secuencialmente los pasos a seguir para configurar el ambiente.
 
 #### Restauración base de datos **reporteria MySQL**
+El dump de la base de datos "reporteria" se encuentra en [reporteria](https://github.com/carolahp/MOP/tree/main/DB/reporteria). 
+Restaurar todas las tablas y no olvidar incluir los procedimientos almacenados (hay sólo uno).
+
 
 #### Ejecución manual de procesos ETL
 Un proceso ETL extrae datos desde una o varias fuentes de datos, los transforma y luego los carga en otra fuente de datos.
 Nuestros ETL extraen los datos desde un archivo excel y desde la base de datos de SAFI para luego cargarlos a la base de datos reportería. 
 
-En Pentaho, los procesos ETL se guardan en "jobs" (archivos formato kjb), los cuales referencian "transformations" (formato ktr)
-El job que extrae los decretos desde el Archivo Decretos (Excel) y los carga en la base de datos Reporteria (MySQL) es ETL/Decretos_Pentaho_to_MySQL/job_decretos.kjb
+En Pentaho, los grandes procesos ETL se guardan en "jobs" (archivos formato kjb), los cuales referencian procesos más simples llamados "transformations" (formato ktr).
+El job que extrae los decretos desde el Archivo Decretos (Excel) y los carga en la base de datos Reporteria (MySQL) es [job_decretos](https://github.com/carolahp/MOP/blob/main/ETL/Decretos_Pentaho_to_MySQL/job_decretos.kjb).
+
+Existe un segundo job llamado [job_claudia_to_mysql](https://github.com/carolahp/MOP/blob/main/ETL/Decretos_Claudia_to_MySQL/job_claudia_to_mysql.kjb) que se encarga de cargar los datos desde el archivo excel de Claudia. Este job existe sólo para propósitos de demostración y no debe ser utilizado en producción. Si se ejecuta, la base de datos reporteria contendrá los registros de Claudia y en consecuencia los reportes mostrarán estos datos. Para revertir esta situación y cargar los registros provenientes del Archivo Decretos, deberá ejecutarse nuevamente el job_decretos mencionado en el párrafo anterior.
 
 Existen dos maneras de ejecutar manualmente este u otro job:
 
 - Desde el Archivo Excel Analistas
 
-  Se presiona un botón para ejecutar el ETL. Más detalles en la siguiente sección.
+  Se presiona un botón para ejecutar el ETL. Más detalles sobre este método en la siguiente sección.
   
 - Desde el software Pentaho Data Integration 
   
