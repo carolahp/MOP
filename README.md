@@ -8,7 +8,7 @@ Se divide en dos secciones:
 
 ## Guía de Usuario 
 
-Se recomienda ver este [video](https://drive.google.com/file/d/1WHZ6JCi0fxejuAg6MF3JqlgZiM_THYfx/view?usp=share_link), donde se explica a los usuarios cómo utilizar el sistema.  
+Para complementar esta guía, se recomienda ver este [video](https://drive.google.com/file/d/1WHZ6JCi0fxejuAg6MF3JqlgZiM_THYfx/view?usp=share_link), donde se explica a los usuarios cómo utilizar el sistema.  
 
 ## Ingreso de datos: Excel Decretos
 
