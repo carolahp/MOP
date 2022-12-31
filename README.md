@@ -1,5 +1,19 @@
 # Reportería Solicitudes de Modificación de Presupuesto
 
+Esta documentación explica cómo utilizar e instalar el sistema de reportería desarrollado durante los meses de Noviembre y Diciembre para la DIRPLAN. 
+
+Se divide en dos secciones: 
+- **Guía de Usuario**: dedicada a los analistas, contiene información necesaria para el ingreso de datos, generación de reportes, etc.
+- **Guía Técnica de Instalación**: explica al usuario técnico informático cómo configurar y administrar el ambiente para ejecutar el sistema completo. 
+
+## Guía de Usuario 
+
+## Ingreso de datos: Excel Decretos
+
+## Procesos ETL
+
+## Reporte solicitudes por etapa
+
 ## Guía técnica de instalación 
 
 ### Software y Licencias Requeridas
@@ -60,13 +74,4 @@ También cuenta con un botón en la pestaña "Solicitudes" que se guarda a sí m
 
 
 #### Programación de la ejecución automática de procesos ETL
-
-
-## Guía para el Analista 
-
-## Ingreso de datos: Excel Decretos
-
-## Procesos ETL
-
-## Reporte solicitudes por etapa
 
