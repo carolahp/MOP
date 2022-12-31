@@ -34,8 +34,30 @@
 
 #### Restauración base de datos **reporteria MySQL**
 
+#### Ejecución manual de procesos ETL
+Un proceso ETL extrae datos desde una o varias fuentes de datos, los transforma y luego los carga en otra fuente de datos.
+Nuestros ETL extraen los datos desde un archivo excel y desde la base de datos de SAFI para luego cargarlos a la base de datos reportería. 
 
-#### Restauración y ejecución manual de procesos ETL
+En Pentaho, los procesos ETL se guardan en "jobs" (archivos formato kjb), los cuales referencian "transformations" (formato ktr)
+El job que extrae los decretos desde el Archivo Decretos (Excel) y los carga en la base de datos Reporteria (MySQL) es ETL/Decretos_Pentaho_to_MySQL/job_decretos.kjb
+
+Existen dos maneras de ejecutar manualmente este u otro job:
+
+- Desde el Archivo Excel Analistas
+
+  Se presiona un botón para ejecutar el ETL. Más detalles en la siguiente sección.
+  
+- Desde el software Pentaho Data Integration 
+  
+  Para ejecutar pentaho se debe abrir el archivo "spoon.bat", ubicado en el directorio de instalación de Pentaho.
+  Luego se debe abrir el job en cuestión y presionar play.
+
+
+#### Preparación del Archivo Decretos (Excel) **reporteria MySQL**
+Este archivo se usa por los analistas para ingresar todos los datos asociados a solicitudes de modificación del presupuesto y a sus correspondientes documentos y montos.
+Este excel utiliza macros para proveer mecanismos de ingreso de datos fijos y de validaciones. 
+También cuenta con un botón en la pestaña "Solicitudes" que se guarda a sí mismo en formato .xls (único formato compatible con los ETL de Pentaho), y luego corre un archivo .bat (ubicado en la misma carpeta que el archivo excel en cuestión) que se encarga de ejecutar el 
+
 
 #### Programación de la ejecución automática de procesos ETL
 
