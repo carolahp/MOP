@@ -11,14 +11,34 @@ Se divide en dos secciones:
 Para complementar esta guía, se recomienda ver el [video tutorial](https://drive.google.com/file/d/1WHZ6JCi0fxejuAg6MF3JqlgZiM_THYfx/view?usp=share_link), donde se explica a los usuarios cómo utilizar el sistema.  
 
 ## Ingreso de datos: Excel Decretos
+El archivo [Decretos](https://github.com/carolahp/MOP/blob/main/Excel/Decretos_Analistas/Decretos.xlsm) se utiliza para ingresar los datos asociados a solicitudes de modificación de presupuesto, documentos y montos asociados. 
+Las principales pestañas a ser modificadas por los analistas son "Solicitudes", "Documentos" y "Movimientos". La manera en la cual se completan los datos en dichas pestañas se encuentra explicada en el [video tutorial](https://drive.google.com/file/d/1WHZ6JCi0fxejuAg6MF3JqlgZiM_THYfx/view?usp=share_link).
 
+La pestaña "Ley" se completa una sola vez en el año y contiene los montos asociados a las leyes para cada servicio, subtítulo e ítem.
+
+La pestaña "(No tocar)" es una pestaña de configuración que debe ser modificada al inicio del año con los valores correspondientes a nombres de servicios, materias, etc, junto con las fechas máximas y mínimas utilizadas para validación de los datos asociados a fechas de documentos ingresados en el excel por los mismos analistas.
 
 ## Generación y actualización de los reportes
+Presionar el botón "Generar Reportes" ubicado en la pestaña "Solicitudes" para actualizar los datos de los reportes.
+El proceso de actualización demora alrededor de 30 segundos.
+
 
 ## Reporte excel solicitudes por etapa
+Cada vez que se presiona el botón Generar Reportes se crea un archivo que contiene para cada solicitud información sobre sus etapas, duración de las mismas, y documentos asociados a dicha solicitud. 
+El nombre del archivo generado hace referencia a la fecha y hora en la cual se generó. 
+Notar que cada vez que el botón Generar Reportes es presionado, un nuevo archivo se genera.
+A modo de ejemplo se presenta el archivo [Reportes/reporte_solicitudes_por_etapa.xls_20221230_194841.xls](https://github.com/carolahp/MOP/blob/main/ETL/Reportes/reporte_solicitudes_por_etapa.xls_20221230_194841.xls), que fue generado el 30 de diciembre de 2022 a las 19 horas 48 minutos y 41 segundos.
 
 ## Reportes visuales Power BI
+La manera de visualizar estos reportes dependerá de las decisiones que se tomen respecto de las licencias de software que el MOP desee adquirir. 
 
+Si la licencia no se adquiere, para visualizar los reportes se deberá abrir el archivo [segundo.pbix](https://github.com/carolahp/MOP/blob/main/Reportes_PowerBI/segundo.pbix), que se encontrará en una carpeta compartida.
+En este caso, el analista deberá asegurarse de presionar el botón "Actualizar" en la interfaz de Power BI Desktop para asegurarse de que los datos desplegados estén actualizados.
+
+
+Si la licencia se adquiere, los reportes se publicarán en la web y podrán visualizarse mediante un link que será publicado por la persona que se encargue de instalar el sistema siguiendo los pasos que se describen a continuación.
+
+## Reporte excel solicitudes por etapa
 
 ## Guía técnica de instalación 
 
@@ -70,7 +90,7 @@ Existe un segundo job llamado [job_claudia_to_mysql](https://github.com/carolahp
 Existen dos maneras de ejecutar manualmente este u otro job:
 
 - **Desde el Archivo Excel Analistas**: 
-El Archivo [Decretos](https://github.com/carolahp/MOP/blob/main/Excel/Decretos_Analistas/Decretos.xlsm) se usa por los analistas para ingresar los datos asociados a solicitudes de modificación del presupuesto y a sus correspondientes documentos y montos. Este archivo contiene un botón etiquetado "Generar Reportes", que ejecutar el ETL necesario. Más detalles sobre este método en la sección "Preparación del Archivo Decretos (Excel)".
+El archivo [Decretos](https://github.com/carolahp/MOP/blob/main/Excel/Decretos_Analistas/Decretos.xlsm) se usa por los analistas para ingresar los datos asociados a solicitudes de modificación del presupuesto y a sus correspondientes documentos y montos. Este archivo contiene un botón etiquetado "Generar Reportes", que ejecutar el ETL necesario. Más detalles sobre este método en la sección "Preparación del Archivo Decretos (Excel)".
   
 - **Desde el software Pentaho Data Integration**   
 Para ejecutar pentaho se debe abrir el archivo "spoon.bat", ubicado en el directorio de instalación de Pentaho.
@@ -98,5 +118,9 @@ Se debe tener en consideración que, tal como el ETL se encuentra programado act
 #### Acceso y disponibilización de los reportes Power BI
 
 El archivo [segundo.pbix](https://github.com/carolahp/MOP/blob/main/Reportes_PowerBI/segundo.pbix) contiene los reportes Power BI generados a partir de los datos ingresados por los analistas. 
-Este archivo se abre utilizando Power BI Desktop Community, que tiene licencia gratuita, y podría por tanto ser instalado en los PC de los analistas para que ellos lo usen para abrir los reportes localmente. Por otro lado, si se quiere publicar estos reportes en la web de manera privada, se deberá comprar la licencia pro de Power BI.
+
+Este archivo se abre utilizando Power BI Desktop Community, que tiene licencia gratuita. 
+Si de decide no adquirir la licencia Pro, la versión Community de Power BI podría ser instalada en los PC de los analistas para que ellos lo usen para abrir los reportes localmente. En este caso el archivo segundo.pbix deberá ser publicado en una carpeta compartida accesible por los analistas. Notar que en este caso los analistas deberán asegurarse de presionar el botón Actualizar en la interfaz de Power BI cada vez que abran los reportes para asegurarse de que los datos desplegados correspondan a los últimos cargados por los ETL. 
+
+Por otro lado, si se quiere publicar estos reportes en la web de manera privada, se deberá comprar la licencia Pro de Power BI. En este caso los analistas no necesitarán presionar un botón para actualizar los datos de los reportes, y además los reportes serán accesibles de forma más sencilla.
 
