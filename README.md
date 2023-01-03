@@ -38,9 +38,10 @@ En este caso, el analista deberá asegurarse de presionar el botón "Actualizar"
 
 Si la licencia se adquiere, los reportes se publicarán en la web y podrán visualizarse mediante un link que será publicado por la persona que se encargue de instalar el sistema siguiendo los pasos que se describen a continuación.
 
-## Reporte excel solicitudes por etapa
+
 
 ## Guía técnica de instalación 
+A continuación se presenta la información sobre licencias utilizadas durante este proyecto junto con los pasos necesarios para configurar el ambiente de producción para ingreso de datos, generación y visualización de reportes.
 
 ### Software y Licencias Requeridas
 - **Pentaho Data Integration** (Community Edition)
