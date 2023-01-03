@@ -56,30 +56,37 @@ Restaurar todas las tablas y no olvidar incluir los procedimientos almacenados (
 
 #### Ejecución manual de procesos ETL
 Un proceso ETL extrae datos desde una o varias fuentes de datos, los transforma y luego los carga en otra fuente de datos.
-Nuestros ETL extraen los datos desde un archivo excel y desde la base de datos de SAFI para luego cargarlos a la base de datos reportería. 
+Nuestros ETL extraen los datos desde un archivo excel y desde la base de datos de SAFI (si se activa la opción) para luego cargarlos a la base de datos reportería. 
 
-En Pentaho, los grandes procesos ETL se guardan en "jobs" (archivos formato kjb), los cuales referencian procesos más simples llamados "transformations" (formato ktr).
+En Pentaho, los grandes procesos ETL se guardan en "jobs" (archivos formato kjb), éstos referencian procesos más simples llamados "transformations" (formato ktr).
 El job que extrae los decretos desde el Archivo Decretos (Excel) y los carga en la base de datos Reporteria (MySQL) es [job_decretos](https://github.com/carolahp/MOP/blob/main/ETL/Decretos_Pentaho_to_MySQL/job_decretos.kjb).
 
 Existe un segundo job llamado [job_claudia_to_mysql](https://github.com/carolahp/MOP/blob/main/ETL/Decretos_Claudia_to_MySQL/job_claudia_to_mysql.kjb) que se encarga de cargar los datos desde el archivo excel de Claudia. Este job existe sólo para propósitos de demostración y no debe ser utilizado en producción. Si se ejecuta, la base de datos reporteria contendrá los registros de Claudia y en consecuencia los reportes mostrarán estos datos. Para revertir esta situación y cargar los registros provenientes del Archivo Decretos, deberá ejecutarse nuevamente el job_decretos mencionado en el párrafo anterior.
 
 Existen dos maneras de ejecutar manualmente este u otro job:
 
-- Desde el Archivo Excel Analistas
-
-  Se presiona un botón para ejecutar el ETL. Más detalles sobre este método en la siguiente sección.
+- **Desde el Archivo Excel Analistas**: 
+Se presiona un botón para ejecutar el ETL. Más detalles sobre este método en la siguiente sección.
   
-- Desde el software Pentaho Data Integration 
-  
-  Para ejecutar pentaho se debe abrir el archivo "spoon.bat", ubicado en el directorio de instalación de Pentaho.
-  Luego se debe abrir el job en cuestión y presionar play.
+- **Desde el software Pentaho Data Integration**   
+Para ejecutar pentaho se debe abrir el archivo "spoon.bat", ubicado en el directorio de instalación de Pentaho.
+Luego se debe abrir el job en cuestión (ya sea [job_decretos](https://github.com/carolahp/MOP/blob/main/ETL/Decretos_Pentaho_to_MySQL/job_decretos.kjb) o [job_claudia_to_mysql](https://github.com/carolahp/MOP/blob/main/ETL/Decretos_Claudia_to_MySQL/job_claudia_to_mysql.kjb)) y presionar el botón verde play.
 
 
 #### Preparación del Archivo Decretos (Excel) **reporteria MySQL**
-Este archivo se usa por los analistas para ingresar todos los datos asociados a solicitudes de modificación del presupuesto y a sus correspondientes documentos y montos.
-Este excel utiliza macros para proveer mecanismos de ingreso de datos fijos y de validaciones. 
-También cuenta con un botón en la pestaña "Solicitudes" que se guarda a sí mismo en formato .xls (único formato compatible con los ETL de Pentaho), y luego corre un archivo .bat (ubicado en la misma carpeta que el archivo excel en cuestión) que se encarga de ejecutar el 
+
+El Archivo [Decretos](https://github.com/carolahp/MOP/blob/main/Excel/Decretos_Analistas/Decretos.xlsm) se usa por los analistas para ingresar los datos asociados a solicitudes de modificación del presupuesto y a sus correspondientes documentos y montos.
+
+Utiliza macros para proveer mecanismos de ingreso de datos predefinidos a través de listas desplegables de selección, y de validaciones de los datos ingresados.
+
+Cuenta con un botón etiquetado "Generar reporte" en la pestaña "Solicitudes" que actualiza los datos del reporte mediante las siguientes acciones:
+- Se guarda a sí mismo en formato .xls (único formato compatible con los ETL de Pentaho, el archivo generado es [DecretosPentaho](https://github.com/carolahp/MOP/blob/main/Excel/Decretos_Analistas/DecretosPentaho.xls)). 
+- Luego ejecuta un archivo .bat ([run_etl.bat](https://github.com/carolahp/MOP/blob/main/Excel/Decretos_Analistas/scripts/runETL.bat)) que se encarga de correr el job_decretos utilizando Pentaho, esto lo hace a través de un comando que se ejecuta en la terminal de windows.
 
 
 #### Programación de la ejecución automática de procesos ETL
 
+Para mantener los datos de los reportes actualizados, el job_decretos debe ejecutarse automáticamente cada cierto intervalo de tiempo (por ejemplo cada media hora). 
+Para lograr esto el programador encargado deberá usar el scheduler de Windows para programar la ejecución del archivo runETL.bat mencionado en la sección inmediatamente anterior a esta.
+
+Se debe tener en consideración que, tal como el ETL se encuentra programado actualmente, cada vez que el job_decretos se ejecuta, un archivo excel que contiene el reporte de tiempo, estado y etapas es generado. Este archivo se almacena en el directorio [Reportes](https://github.com/carolahp/MOP/tree/main/ETL/Reportes) y se nombra considerando el datetime de cuando se generó del siguiente modo: reporte_solicitudes_por_etapa.xls_AAAMMDD_HHSSmm.xls . Se adjunta un archivo de ejemplo en este repositorio: [reporte_solicitudes_por_etapa.xls_20221230_194841.xls](https://github.com/carolahp/MOP/blob/main/ETL/Reportes/reporte_solicitudes_por_etapa.xls_20221230_194841.xls)
