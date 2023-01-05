@@ -8,7 +8,9 @@ Se divide en dos secciones:
 
 ## Guía de Usuario 
 
-Para complementar esta guía, se recomienda ver el [video tutorial](https://drive.google.com/file/d/1WHZ6JCi0fxejuAg6MF3JqlgZiM_THYfx/view?usp=share_link), donde se explica a los usuarios cómo utilizar el sistema.  
+Para complementar esta guía, se recomienda ver el [video tutorial](https://drive.google.com/file/d/1WHZ6JCi0fxejuAg6MF3JqlgZiM_THYfx/view?usp=share_link), donde se explica a los usuarios cómo utilizar el sistema.
+
+Además se recomienda revisar el [diagrama del proceso](https://github.com/carolahp/MOP/blob/main/Modelamiento_Procesos/Proceso%20Solicitud.png) de solicitud de modificación presupuestaria.
 
 ### Ingreso de datos: Excel Decretos
 El archivo [Decretos](https://github.com/carolahp/MOP/blob/main/Excel/Decretos_Analistas/Decretos.xlsm) se utiliza para ingresar los datos asociados a solicitudes de modificación de presupuesto, documentos y montos asociados. 
